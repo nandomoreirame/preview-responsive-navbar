@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Preview Responsive Bar</title>
+  <link rel="stylesheet" type="text/css" media="screen" href="./style.css">
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="navbar__container">
+      <a href="#" class="navbar__prev">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+          class="feather feather-chevron-left">
+          <path d="M15 18l-6-6 6-6" />
+        </svg>
+        <span>Ver informações do template</span>
+      </a>
+      <ul class="navbar__nav">
+        <li class="navbar__item">
+          <a href="#" class="navbar__link navbar__link--active" data-preview-device="desktop" data-preview-toggle>
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="feather feather-monitor">
+              <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+              <path d="M8 21h8m-4-4v4" />
+            </svg>
+          </a>
+        </li>
+        <li class="navbar__item">
+          <a href="#" class="navbar__link" data-preview-device="tablet" data-preview-toggle>
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="feather feather-tablet">
+              <rect x="4" y="2" width="16" height="20" rx="2" ry="2" transform="rotate(180 12 12)" />
+              <line x1="12" y1="18" x2="12" y2="18" />
+            </svg>
+          </a>
+        </li>
+        <li class="navbar__item">
+          <a href="#" class="navbar__link" data-preview-device="mobile" data-preview-toggle>
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 22 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="feather feather-smartphone">
+              <rect x="5" y="2" width="12" height="20" rx="2" ry="2" />
+              <line x1="12" y1="18" x2="10" y2="18" />
+            </svg>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="preview">
+    <iframe class="preview__iframe" data-iframe src="https://nandomoreira.me/?utm_source=iframe-preview"></iframe>
+  </main>
+
+  <script>
+    (function () {
+      var elToggle = document.querySelectorAll('[data-preview-toggle]');
+      var elIframe = document.querySelectorAll('[data-iframe]');
+      var classLink = 'navbar__link--active';
+      var prefixClass = 'preview__iframe--';
+
+      [].forEach.call(elToggle, function (el) {
+        el.addEventListener('click', function () {
+          [].forEach.call(elToggle, function (e) {
+            if (e.classList.contains(classLink)) {
+              e.classList.remove(classLink);
+            }
+          });
+
+          [].forEach.call(elIframe, function (iframe) {
+            iframe.classList.remove(prefixClass + 'desktop', prefixClass + 'tablet', prefixClass + 'mobile');
+            iframe.classList.add(prefixClass + el.getAttribute('data-preview-device'));
+          });
+
+          el.classList.add(classLink);
+        })
+      })
+    })()
+  </script>
+</body>
+</html>
